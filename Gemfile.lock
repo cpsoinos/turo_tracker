@@ -54,6 +54,7 @@ GEM
       thor
       tzinfo
     awesome_print (1.7.0)
+    bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.6)
     capybara (2.7.1)
@@ -75,6 +76,12 @@ GEM
     coolline (0.5.0)
       unicode_utils (~> 1.4)
     debug_inspector (0.0.2)
+    devise (4.2.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     dotenv (2.1.0)
     erubis (2.7.0)
@@ -86,6 +93,7 @@ GEM
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    hashie (3.4.6)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -94,6 +102,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.0.8)
@@ -110,10 +119,27 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
+    omniauth (1.3.1)
+      hashie (>= 1.2, < 4)
+      rack (>= 1.0, < 3)
+    omniauth-automatic (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.4.0)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
+    orm_adapter (0.5.0)
     pg (0.19.0)
     polylines (0.3.0)
     pry (0.10.4)
@@ -158,6 +184,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     restless_router (0.0.3)
       addressable
     rspec-core (2.14.7)
@@ -207,6 +235,8 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.1)
     unicode_utils (1.4.0)
+    warden (1.2.6)
+      rack (>= 1.0)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -227,11 +257,13 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.2)
+  devise
   dotenv
   jbuilder (~> 2.5)
   jquery-rails
   launchy
   listen (~> 3.0.5)
+  omniauth-automatic
   pg (~> 0.18)
   pry
   pry-byebug
