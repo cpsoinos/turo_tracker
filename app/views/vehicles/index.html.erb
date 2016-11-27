@@ -1,1 +1,24 @@
 <%= link_to "Sign in with Automatic", user_automatic_omniauth_authorize_path %>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Year</th>
+    <th>VIN</th>
+    <th>Odometer</th>
+    <th>URL</th>
+  </tr>
+  <% @vehicles.each do |vehicle| %>
+    <tr>
+      <td></td>
+      <td><%= @vehicle.make %></td>
+      <td><%= @vehicle.model %></td>
+      <td><%= @vehicle.year %></td>
+      <td><%= @vehicle.vin %></td>
+      <td><%= @vehicle.odometer %></td>
+      <td><%= @vehicle.url %></td>
+    </tr>
+  <% end %>
+</table>
