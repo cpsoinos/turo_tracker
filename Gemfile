@@ -21,11 +21,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'automatic-client'
 gem 'omniauth-automatic'
+gem 'alchemist'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'dotenv'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
   gem 'awesome_print', require: 'ap'
   gem 'pry'
   gem 'pry-rails'
