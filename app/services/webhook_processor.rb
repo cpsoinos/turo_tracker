@@ -11,7 +11,8 @@ class WebhookProcessor
       remote_id: data["id"],
       webhook_type: data["type"],
       location: data["location"],
-      vehicle: Vehicle.find_by(remote_id: data["vehicle"]["id"])
+      vehicle: Vehicle.find_by(remote_id: data["vehicle"]["id"]),
+      data: data
     )
   end
 
