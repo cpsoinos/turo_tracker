@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     get 'import', to: 'vehicles#import', as: 'import'
   end
 
+  post '/:integration_name' => 'webhooks#receive', as: :receive_webhooks
+
 end

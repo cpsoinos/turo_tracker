@@ -1,6 +1,7 @@
 class Vehicle < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   has_many :trips
+  has_many :webhooks
 
   def self.remote_objects
     Automatic::Models::Vehicles.all.to_a

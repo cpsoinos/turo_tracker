@@ -4,8 +4,8 @@ class VehiclesController < ApplicationController
     @vehicles = Vehicle.all
   end
 
-  def import
-    VehicleImporter.new(current_user).import
+  def show
+    @vehicle = Vehicle.find(params[:id])
   end
 
 end

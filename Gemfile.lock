@@ -54,8 +54,13 @@ GEM
       terminal-table
       thor
       tzinfo
+    autoprefixer-rails (6.5.3)
+      execjs
     awesome_print (1.7.0)
     bcrypt (3.1.11)
+    bootstrap (4.0.0.alpha5)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.2)
     byebug (9.0.6)
     capybara (2.7.1)
@@ -264,6 +269,7 @@ DEPENDENCIES
   alchemist
   automatic-client
   awesome_print
+  bootstrap (~> 4.0.0.alpha5)
   byebug
   capybara
   carrierwave (>= 1.0.0.rc, < 2.0)

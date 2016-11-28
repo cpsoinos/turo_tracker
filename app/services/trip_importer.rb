@@ -24,13 +24,14 @@ class TripImporter
         started_at: rt.started_at,
         ended_at: rt.ended_at,
         distance: convert_distance(rt),
+        duration: rt.duration,
         path: rt.path,
         fuel_cost_usd: rt.fuel_cost_usd,
         start_location: rt.start_location,
         start_address: rt.start_address,
         end_location: rt.end_location,
         end_address: rt.end_address,
-        fuel_volume: rt.fuel_volume,
+        fuel_volume: convert_fuel_volume(rt),
         # tags:
       )
     end
@@ -38,6 +39,10 @@ class TripImporter
 
   def convert_distance(remote_trip)
     remote_trip.distance_m.meters.to.miles.value
+  end
+
+  def convert_fuel_volume(remote_trip)
+    remote_trip.fuel_volume.liters.to.gallons.value
   end
 
 end
