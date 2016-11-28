@@ -8,9 +8,9 @@ class WebhookProcessor
 
   def process
     Webhook.create(
-      remote_id: data.id,
-      webhook_type: data.type,
-      location: data.location,
+      remote_id: data["id"],
+      webhook_type: data["type"],
+      location: data["location"],
       vehicle: Vehicle.find_by(remote_id: data["vehicle"]["id"])
     )
   end

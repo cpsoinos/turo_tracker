@@ -3,6 +3,10 @@ class Vehicle < ApplicationRecord
   has_many :trips
   has_many :webhooks
 
+  def name
+    "#{make} #{model}"
+  end
+
   def self.remote_objects
     Automatic::Models::Vehicles.all.to_a
   end

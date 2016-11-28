@@ -2,7 +2,6 @@ class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def receive
-    binding.pry
     if request.headers['Content-Type'] == 'application/json'
       data = JSON.parse(request.body.read)
     else
