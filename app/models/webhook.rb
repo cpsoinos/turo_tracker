@@ -45,7 +45,7 @@ class Webhook < ActiveRecord::Base
 
   def should_notify?
     webhook_type.in?(["ignition:on", "ignition:off"]) &&
-    distance([location["lat"], location["lon"]], Webhook.cedar_st_lat_lon) <= 100
+      distance([location["lat"], location["lon"]], Webhook.cedar_st_lat_lon) <= 100
   end
 
   def distance(loc1, loc2)
