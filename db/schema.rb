@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218205457) do
+ActiveRecord::Schema.define(version: 20161219013504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "tolls", force: :cascade do |t|
+    t.datetime "posted_at"
+    t.datetime "occurred_at"
+    t.string   "memo"
+    t.string   "entry_plaza"
+    t.string   "exit_plaza"
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "USD", null: false
+    t.integer  "vehicle_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["vehicle_id"], name: "index_tolls_on_vehicle_id", using: :btree
+  end
 
   create_table "trips", force: :cascade do |t|
     t.string   "url"
@@ -64,12 +78,13 @@ ActiveRecord::Schema.define(version: 20161218205457) do
     t.string   "year"
     t.integer  "odometer"
     t.string   "vin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "url"
     t.string   "remote_id"
     t.string   "photo"
     t.bigint   "edmunds_id"
+    t.string   "transponder"
   end
 
   create_table "webhooks", force: :cascade do |t|
