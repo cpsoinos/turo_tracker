@@ -14,7 +14,6 @@ class TollRetriever
 
     downloads_before = Dir.entries(download_directory)
 
-
     browser = Watir::Browser.new :chrome, profile: profile
     browser.goto('https://www.ezdrivema.com/ezpassmalogin')
     browser.text_field(name: 'dnn$ctr689$View$txtUserName').set(ENV['EZDRIVE_USERNAME'])

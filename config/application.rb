@@ -13,6 +13,7 @@ module TuroTracker
     # -- all .rb files in that directory are automatically loaded.
 
     config.autoload_paths << Rails.root.join('lib')
-    
+    config.active_job.queue_adapter = :sidekiq
+
   end
 end

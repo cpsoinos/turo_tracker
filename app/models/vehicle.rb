@@ -2,6 +2,7 @@ class Vehicle < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   has_many :trips
   has_many :tolls
+  has_many :reservations
   has_many :webhooks
 
   def name

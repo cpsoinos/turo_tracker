@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219013504) do
+ActiveRecord::Schema.define(version: 20161219030815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.string   "renter"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "expected_earnings_cents",    default: 0,     null: false
+    t.string   "expected_earnings_currency", default: "USD", null: false
+    t.integer  "miles_included"
+    t.string   "renter_photo"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "turo_reservation_id"
+    t.index ["vehicle_id"], name: "index_reservations_on_vehicle_id", using: :btree
+  end
 
   create_table "tolls", force: :cascade do |t|
     t.datetime "posted_at"
@@ -85,6 +100,7 @@ ActiveRecord::Schema.define(version: 20161219013504) do
     t.string   "photo"
     t.bigint   "edmunds_id"
     t.string   "transponder"
+    t.integer  "turo_id"
   end
 
   create_table "webhooks", force: :cascade do |t|
@@ -99,6 +115,7 @@ ActiveRecord::Schema.define(version: 20161219013504) do
     t.index ["vehicle_id"], name: "index_webhooks_on_vehicle_id", using: :btree
   end
 
+  add_foreign_key "reservations", "vehicles"
   add_foreign_key "trips", "vehicles"
   add_foreign_key "webhooks", "vehicles"
 end
