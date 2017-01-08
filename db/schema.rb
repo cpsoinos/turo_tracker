@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219030815) do
+ActiveRecord::Schema.define(version: 20170108031035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.string   "category"
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "USD", null: false
+    t.datetime "date"
+    t.string   "receipt"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["vehicle_id"], name: "index_expenses_on_vehicle_id", using: :btree
+  end
+
+  create_table "renters", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "photo"
+    t.string "turo_id"
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "vehicle_id"
@@ -23,10 +42,13 @@ ActiveRecord::Schema.define(version: 20161219030815) do
     t.integer  "expected_earnings_cents",    default: 0,     null: false
     t.string   "expected_earnings_currency", default: "USD", null: false
     t.integer  "miles_included"
-    t.string   "renter_photo"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "turo_reservation_id"
+    t.integer  "reimbursements_cents",       default: 0,     null: false
+    t.string   "reimbursements_currency",    default: "USD", null: false
+    t.integer  "renter_id"
+    t.index ["renter_id"], name: "index_reservations_on_renter_id", using: :btree
     t.index ["vehicle_id"], name: "index_reservations_on_vehicle_id", using: :btree
   end
 
@@ -62,6 +84,7 @@ ActiveRecord::Schema.define(version: 20161219030815) do
     t.jsonb    "end_address"
     t.float    "fuel_volume"
     t.string   "tags",                        array: true
+    t.boolean  "expensed"
     t.index ["vehicle_id"], name: "index_trips_on_vehicle_id", using: :btree
   end
 
@@ -93,14 +116,20 @@ ActiveRecord::Schema.define(version: 20161219030815) do
     t.string   "year"
     t.integer  "odometer"
     t.string   "vin"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "url"
     t.string   "remote_id"
     t.string   "photo"
     t.bigint   "edmunds_id"
     t.string   "transponder"
     t.integer  "turo_id"
+    t.integer  "loan_payment_cents",         default: 0,     null: false
+    t.string   "loan_payment_currency",      default: "USD", null: false
+    t.integer  "insurance_payment_cents",    default: 0,     null: false
+    t.string   "insurance_payment_currency", default: "USD", null: false
+    t.integer  "parking_payment_cents",      default: 0,     null: false
+    t.string   "parking_payment_currency",   default: "USD", null: false
   end
 
   create_table "webhooks", force: :cascade do |t|
@@ -112,9 +141,13 @@ ActiveRecord::Schema.define(version: 20161219030815) do
     t.string   "webhook_type"
     t.jsonb    "location"
     t.integer  "vehicle_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["vehicle_id"], name: "index_webhooks_on_vehicle_id", using: :btree
   end
 
+  add_foreign_key "expenses", "vehicles"
+  add_foreign_key "reservations", "renters"
   add_foreign_key "reservations", "vehicles"
   add_foreign_key "trips", "vehicles"
   add_foreign_key "webhooks", "vehicles"

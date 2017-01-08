@@ -7,11 +7,14 @@ class WebhookProcessor
   end
 
   def process
+    binding.pry
     Webhook.create(
       remote_id: data["id"],
       webhook_type: data["type"],
       location: data["location"],
       vehicle: Vehicle.find_by(remote_id: data["vehicle"]["id"]),
+      latitude: data["location"]["lat"],
+      longitude: data["location"]["longitude"],
       data: data,
       integration: "automatic"
     )

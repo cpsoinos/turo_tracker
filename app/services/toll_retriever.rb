@@ -13,19 +13,25 @@ class TollRetriever
     profile['download.prompt_for_download'] = false
 
     downloads_before = Dir.entries(download_directory)
-
     browser = Watir::Browser.new :chrome, profile: profile
+
+    # login page
     browser.goto('https://www.ezdrivema.com/ezpassmalogin')
     browser.text_field(name: 'dnn$ctr689$View$txtUserName').set(ENV['EZDRIVE_USERNAME'])
     browser.text_field(name: 'dnn$ctr689$View$txtPassword').set(ENV['EZDRIVE_PASSWORD'])
     browser.link(id: "btnLogin").click
+
+    # transactions page
     browser.goto("https://www.ezdrivema.com/ezpassviewtransactions")
     browser.text_field(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$TransponderNumberTextBox').set(vehicle.transponder)
     browser.text_field(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$txtStartDate').click
-    browser.td(id: "dnn_ctr1180_ucMassDotTcoreTransaction_ucBaseTcoreTransaction_txtStartDate_B-1").click
-    browser.tds(class: 'dxeCalendarDay').detect { |cell| cell.inner_html == '1' }.click
+
+    # set start date
+    browser.text_field(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$txtStartDate').set("1/1/2016")
     browser.select_list(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$ddlTransactionsPerPage').select(50)
+    # search
     browser.link(id: 'dnn_ctr1180_ucMassDotTcoreTransaction_ucBaseTcoreTransaction_SearchButton').click
+    # download
     browser.link(id: 'dnn_ctr1180_ucMassDotTcoreTransaction_ucBaseTcoreTransaction_hlDownload').click
     sleep(3)
 

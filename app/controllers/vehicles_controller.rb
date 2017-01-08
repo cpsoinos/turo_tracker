@@ -1,7 +1,7 @@
 class VehiclesController < ApplicationController
 
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.all.order(:id)
   end
 
   def show

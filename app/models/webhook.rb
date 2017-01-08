@@ -2,6 +2,8 @@ class Webhook < ActiveRecord::Base
   belongs_to :vehicle
   after_create :push_notification, if: :should_notify?
 
+  reverse_geocoded_by :latitude, :longitude
+
   def self.cedar_st_address
     "57 Cedar St., Cambridge, MA"
   end
@@ -45,7 +47,7 @@ class Webhook < ActiveRecord::Base
 
   def should_notify?
     webhook_type.in?(["ignition:on", "ignition:off"]) &&
-      distance([location["lat"], location["lon"]], Webhook.cedar_st_lat_lon) <= 100
+      distance_from(Webhook.cedar_st_lat_lon) <= 0.1
   end
 
   def distance(loc1, loc2)

@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   resources :vehicles do
     get 'import', to: 'vehicles#import', as: 'import'
+    resources :trips, only: [:index]
+    resources :tolls, only: [:index]
+    resources :expenses
   end
+
+  get '/dashboard', to: 'reporting#dashboard', as: 'dashboard'
 
   post '/:integration_name' => 'webhooks#receive', as: :receive_webhooks
 
