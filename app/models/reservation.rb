@@ -13,7 +13,7 @@ class Reservation < ApplicationRecord
   }
 
   def trips
-    vehicle.trips.where("started_at > ? AND ended_at < ?", start_date, end_date)
+    vehicle.trips.where("started_at > ? AND ended_at < ?", self.start_date, self.end_date)
   end
 
   def tolls

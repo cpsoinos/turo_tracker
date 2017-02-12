@@ -10,7 +10,7 @@
   <tbody>
     <% @tolls.each do |toll| %>
       <tr>
-        <td><%= toll.occurred_at.strftime("%m/%d/%y - %l:%M%P") %></td>
+        <td><%= toll.occurred_at.strftime("%m/%d/%y - %l:%M%P") if toll.occurred_at %></td>
         <td><%= toll.posted_at.strftime("%m/%d/%y - %l:%M%P") %></td>
         <td><%= toll.memo %></td>
         <td class="text-xs-right"><%= humanized_money_with_symbol(toll.amount) %></td>

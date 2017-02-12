@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108031035) do
+ActiveRecord::Schema.define(version: 20170108194153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20170108031035) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "vehicle_id"
-    t.string   "renter"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "expected_earnings_cents",    default: 0,     null: false
@@ -63,6 +62,8 @@ ActiveRecord::Schema.define(version: 20170108031035) do
     t.integer  "vehicle_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "exit_location"
+    t.string   "travel_agency"
     t.index ["vehicle_id"], name: "index_tolls_on_vehicle_id", using: :btree
   end
 
