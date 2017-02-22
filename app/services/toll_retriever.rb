@@ -25,11 +25,11 @@ class TollRetriever
     # set start date
     browser.text_field(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$txtStartDate').set("1/1/2017")
     sleep(1)
-    # browser.select_list(name: 'dnn$ctr1180$ucMassDotTcoreTransaction$ucBaseTcoreTransaction$ddlTransactionsPerPage').select(50)
     # search
     browser.link(id: 'dnn_ctr1180_ucMassDotTcoreTransaction_ucBaseTcoreTransaction_SearchButton').click
+    sleep(5)
     # download
-    browser.link(id: 'dnn_ctr1180_ucMassDotTcoreTransaction_ucBaseTcoreTransaction_hlDownload').click
+    browser.link(href: '/report?report=transcsv').click
     sleep(3)
 
     difference = Dir.entries(download_directory) - downloads_before

@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @vehicle.trips.each do |trip| %>
+    <% @trips.each do |trip| %>
       <tr>
         <td><%= trip.started_at.strftime("%m/%d/%y - %l:%M%P") %></td>
         <td><%= trip.ended_at.strftime("%m/%d/%y - %l:%M%P") %></td>

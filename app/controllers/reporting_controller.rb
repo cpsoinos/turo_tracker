@@ -7,6 +7,11 @@ class ReportingController < ApplicationController
     @monthly_breakdown = monthly_breakdown
   end
 
+  def import_data
+    DataRetriever.new.execute
+    redirect_to :dashboard
+  end
+
   protected
 
   def calculate_earnings

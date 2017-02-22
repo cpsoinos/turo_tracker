@@ -1,18 +1,21 @@
 class ReservationScraperJob < ApplicationJob
   queue_as :default
+  concurrency 5, drop: false
 
-  def perform(*args)
-    login
-    total = reservations.count
-    count = 0
-    bar = RakeProgressbar.new(total)
-    reservations.each do |reservation|
-      scrape_details(reservation)
-      bar.inc
-      count += 1
-    end
-    bar.finished
-    browser.close
+  def perform(reservation)
+    ReservationScraper.new(reservation).execute
+
+    # login
+    # total = reservations.count
+    # count = 0
+    # bar = RakeProgressbar.new(total)
+    # reservations.each do |reservation|
+    #   scrape_details(reservation)
+    #   bar.inc
+    #   count += 1
+    # end
+    # bar.finished
+    # browser.close
   end
 
   private

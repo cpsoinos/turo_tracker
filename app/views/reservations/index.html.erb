@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered table-hover table-sm">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Renter</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Miles Included</th>
+      <th>Miles Traveled</th>
+      <th>Tolls Incurred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <% next if reservation.start_date.nil? %>
+      <% next if reservation.end_date.nil? %>
+      <tr>
+        <td><%= link_to reservation.renter.try(:name), reservation.url %></td>
+        <td><%= reservation.start_date.in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%y - %l:%M%P") %></td>
+        <td><%= reservation.end_date.in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%y - %l:%M%P") %></td>
+        <td><%= reservation.miles_included %></td>
+        <td class="text-right"><%= link_to reservation.miles_traveled, vehicle_reservation_trips_path(@vehicle, reservation) %></td>
+        <td class="text-right"><%= link_to humanized_money_with_symbol(reservation.tolls_incurred), vehicle_reservation_tolls_path(@vehicle, reservation) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

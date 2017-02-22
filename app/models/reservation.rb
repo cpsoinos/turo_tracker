@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
   # has_many :trips
   belongs_to :vehicle
-  belongs_to :renter
+  belongs_to :renter, optional: true
 
   monetize :expected_earnings_cents, allow_nil: true, numericality: {
     greater_than_or_equal_to: 0,
@@ -20,12 +20,20 @@ class Reservation < ApplicationRecord
     vehicle.tolls.where(occurred_at: start_date..end_date)
   end
 
+  def tolls_incurred
+    Money.new(tolls.sum(:amount_cents))
+  end
+
   def url
     "https://turo.com/reservation/#{turo_reservation_id}"
   end
 
   def receipt_url
     "https://turo.com/reservation/#{turo_reservation_id}/receipt"
+  end
+
+  def miles_traveled
+    trips.sum(:distance).round
   end
 
   def scrape_details
