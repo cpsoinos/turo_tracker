@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108031035) do
+ActiveRecord::Schema.define(version: 20170219152250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,19 +36,17 @@ ActiveRecord::Schema.define(version: 20170108031035) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "vehicle_id"
-    t.string   "renter"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "expected_earnings_cents",    default: 0,     null: false
+    t.integer  "expected_earnings_cents",    default: 0
     t.string   "expected_earnings_currency", default: "USD", null: false
     t.integer  "miles_included"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "turo_reservation_id"
-    t.integer  "reimbursements_cents",       default: 0,     null: false
+    t.integer  "reimbursements_cents",       default: 0
     t.string   "reimbursements_currency",    default: "USD", null: false
     t.integer  "renter_id"
-    t.index ["renter_id"], name: "index_reservations_on_renter_id", using: :btree
     t.index ["vehicle_id"], name: "index_reservations_on_vehicle_id", using: :btree
   end
 
@@ -63,6 +61,8 @@ ActiveRecord::Schema.define(version: 20170108031035) do
     t.integer  "vehicle_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "exit_location"
+    t.string   "travel_agency"
     t.index ["vehicle_id"], name: "index_tolls_on_vehicle_id", using: :btree
   end
 
@@ -147,7 +147,6 @@ ActiveRecord::Schema.define(version: 20170108031035) do
   end
 
   add_foreign_key "expenses", "vehicles"
-  add_foreign_key "reservations", "renters"
   add_foreign_key "reservations", "vehicles"
   add_foreign_key "trips", "vehicles"
   add_foreign_key "webhooks", "vehicles"

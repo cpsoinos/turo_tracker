@@ -11,9 +11,14 @@ Rails.application.routes.draw do
     resources :trips, only: [:index]
     resources :tolls, only: [:index]
     resources :expenses
+    resources :reservations do
+      resources :tolls
+      resources :trips
+    end
   end
 
   get '/dashboard', to: 'reporting#dashboard', as: 'dashboard'
+  post '/import-data', to: 'reporting#import_data', as: 'import_data'
 
   post '/:integration_name' => 'webhooks#receive', as: :receive_webhooks
 

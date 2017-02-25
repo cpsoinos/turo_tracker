@@ -1,0 +1,31 @@
+<%= form_for @vehicle do |f| %>
+
+  <div class="col-xs-4">
+    <%= image_tag(@vehicle.photo.url) %>
+    <%= f.label :photo do %>
+      <%= f.file_field :photo %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-8">
+    <div class="form-group row">
+
+    </div>
+    <%= f.label :make, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :make %>
+
+    </div>
+
+    <%= f.label :model %>
+    <%= f.text_field :model %>
+
+    <%= f.label :year %>
+    <%= f.text_field :year %>
+
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+
+  </div>
+
+<% end %>

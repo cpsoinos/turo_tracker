@@ -5,6 +5,7 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+# Mongoid.load! './config/mongoid.yml'
 
 module TuroTracker
   class Application < Rails::Application

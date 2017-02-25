@@ -1,6 +1,5 @@
 class Trip < ApplicationRecord
   belongs_to :vehicle
-  # has_many :tolls
 
   def self.remote_objects(vehicle)
     page = 1
