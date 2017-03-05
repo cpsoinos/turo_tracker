@@ -36,7 +36,7 @@ class ReportingController < ApplicationController
   end
 
   def monthly_breakdown
-    year = DateTime.new(2016)
+    year = DateTime.new(params[:year].to_i)
     range = year.beginning_of_year..year.end_of_year
     month_names = range.to_a.map(&:beginning_of_month).uniq.map { |m| Date::MONTHNAMES[m.month] }
 
@@ -54,8 +54,8 @@ class ReportingController < ApplicationController
   end
 
   def month_range(month)
-    start_of_month = DateTime.parse("#{month}, 2016").beginning_of_month
-    end_of_month = DateTime.parse("#{month}, 2016").end_of_month
+    start_of_month = DateTime.parse("#{month}, #{params[:year]}").beginning_of_month
+    end_of_month = DateTime.parse("#{month}, #{params[:year]}").end_of_month
     month_range = start_of_month..end_of_month
   end
 

@@ -12,4 +12,17 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
   end
 
+  def update
+    @vehicle = Vehicle.find(params[:id])
+    if @vehicle.update(vehicle_params)
+      render :show
+    end
+  end
+
+  protected
+
+  def vehicle_params
+    params.require(:vehicle).permit(:make, :model, :year, :vin, :odometer, :url, :remote_id, :photo, :edmunds_id, :transponder, :turo_id)
+  end
+
 end

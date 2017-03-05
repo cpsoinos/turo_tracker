@@ -3,5 +3,6 @@ class ReservationRetrievalJob < ApplicationJob
 
   def perform(*args)
     ReservationRetriever.new.retrieve_reservations
+    RenterRetrievalJob.perform_later
   end
 end

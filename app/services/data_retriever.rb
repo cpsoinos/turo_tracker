@@ -7,7 +7,9 @@ class DataRetriever
   end
 
   def import_trips
-    TripRetrievalJob.perform_later
+    Vehicle.all.each do |vehicle|
+      TripRetrievalJob.perform_later(vehicle)
+    end
   end
 
   def import_tolls
