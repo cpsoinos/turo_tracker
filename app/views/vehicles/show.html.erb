@@ -9,6 +9,9 @@
 </div>
 
 <div style="margin-top: 3em;">
+
+  <h2>Add an expense:</h2>
+
   <%= form_for [@vehicle, Expense.new] do |f| %>
 
     <%= f.hidden_field :vehicle_id, value: @vehicle.id %>

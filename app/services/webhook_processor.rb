@@ -7,7 +7,6 @@ class WebhookProcessor
   end
 
   def process
-    binding.pry
     Webhook.create(
       remote_id: data["id"],
       webhook_type: data["type"],

@@ -4,7 +4,6 @@ class WebhooksController < ApplicationController
   def receive
     if request.headers['Content-Type'] == 'application/json'
       data = JSON.parse(request.body.read)
-      binding.pry
     else
       # application/x-www-form-urlencoded
       data = params.as_json

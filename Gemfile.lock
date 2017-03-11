@@ -388,6 +388,7 @@ DEPENDENCIES
   mechanize
   mini_magick
   money-rails
+  nokogiri
   omniauth-automatic
   pg (~> 0.18)
   pry
@@ -414,4 +415,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.14.4
+   1.14.5

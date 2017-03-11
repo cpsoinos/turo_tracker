@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219152250) do
+ActiveRecord::Schema.define(version: 20170310121435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20170219152250) do
     t.integer  "reimbursements_cents",       default: 0
     t.string   "reimbursements_currency",    default: "USD", null: false
     t.integer  "renter_id"
+    t.jsonb    "page_html"
+    t.jsonb    "receipt_html"
     t.index ["vehicle_id"], name: "index_reservations_on_vehicle_id", using: :btree
   end
 

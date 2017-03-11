@@ -37,6 +37,7 @@ gem 'google_places'
 gem 'smarter_csv'
 gem 'rake-progressbar'
 gem 'activejob-traffic_control'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

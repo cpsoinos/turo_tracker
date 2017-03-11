@@ -32,6 +32,9 @@ class ReservationScraper
   end
 
   def scrape_details
+    browser.goto(reservation.url)
+    reservation.miles_included = browser.div(class: "reservationDetails-milesIncluded").inner_html.match('(?<=-->)(.*)(?=<!)')[1].sub(" miles", "").sub(",", "").to_i
+
     browser.goto(reservation.receipt_url)
 
     pickup_summary = browser.div(class: "reservationSummary-schedulePickUp")
