@@ -1,9 +1,14 @@
 class DataRetriever
 
   def execute
+    import_vehicles
     import_trips
     import_tolls
     import_reservations
+  end
+
+  def import_vehicles
+    VehicleImporter.new.import
   end
 
   def import_trips
